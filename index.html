@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+      <canvas id="webgl-canvas" class="webgl-canvas__body"></canvas>
+    
+
+
+    <script id="v-shader" type="x-shader/x-vertex">
+      varying vec2 vUv;
+      void main(){
+        vUv = uv;
+        vec3 pos = position;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+      }
+      </script>
+
+
+      <script id="f-shader" type="x-shader/x-fragment">
+      varying vec2 vUv;
+      uniform sampler2D uTexture;
+      uniform sampler2D uDisplacement;
+      float PI = 3.141592653989793238;
+      
+      void main(){
+        vec4 displacement = texture2D(uDisplacement,vUv);
+        float theta = displacement.r*2.*PI;
+        vec2 dir = vec2(sin(theta),cos(theta));//歪み具合を調整する
+
+        vec2 uv = vUv + dir*displacement.r*0.1;
+        
+        
+        
+        vec4 color = texture2D(uTexture,uv);
+        gl_FragColor = vec4(color);
+      }
+      </script>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
+
+<!--
+npm installコマンドを実行してください。
+-->
