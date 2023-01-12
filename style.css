@@ -108,3 +108,11 @@ a {
     padding: 5px;
   }
 }
+
+footer{
+  position:fixed;
+  left:2%;
+  bottom:2%;
+  color:#251D18;
+  font-family: "niveau-grotesk", sans-serif;
+}
