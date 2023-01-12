@@ -79,9 +79,6 @@ function init() {
   renderer.setPixelRatio(window.devicePixelRatio); //アスペクト比を指定
   renderer.render(scene, camera);
 
-  //マウスでカメラ操作を有効化する
-  const orbitControls = new OrbitControls(camera, renderer.domElement);
-
   //リサイズ対応
   window.addEventListener("resize", onWindowResize);
 }
@@ -115,7 +112,6 @@ function trackMousePos() {
   } else {
     setNewWave(mouse.x, mouse.y, currentWave);
     currentWave = (currentWave + 1) % max; //1〜maxまでmousemoveしたら増加する変数
-    console.log(currentWave);
   }
   prevMouse.x = mouse.x;
   prevMouse.y = mouse.y;
@@ -158,8 +154,6 @@ function onWindowResize() {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
-
-console.log(baseTexture);
 //アニメーション用関数
 function render() {
   renderer.setRenderTarget(baseTexture);

@@ -1,3 +1,3 @@
-"cd three-project
+cd three-project
 npm install
-npm run dev"# Ripple-shader
+npm run dev
